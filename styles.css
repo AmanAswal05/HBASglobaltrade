@@ -15,6 +15,8 @@
   --soft-shadow: 0 14px 34px rgba(31, 143, 175, 0.12);
   --radius: 8px;
   --max: 1180px;
+  /* Dynamic header height - calculated by JavaScript to prevent content overlap */
+  --header-height: 0px;
 }
 
 [data-theme="dark"] {
@@ -49,6 +51,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* Scroll offset for anchor links to account for fixed header */
+  scroll-padding-top: calc(var(--header-height) + 16px);
 }
 
 body {
@@ -169,8 +173,10 @@ textarea {
 
 .nav-panel {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 .nav-panel a:not(.icon-link),
@@ -188,6 +194,7 @@ textarea {
   color: var(--muted);
   font-weight: 750;
   font-size: 0.91rem;
+  white-space: nowrap;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -290,19 +297,23 @@ textarea {
   width: min(calc(100% - 32px), var(--max));
   margin: 0 auto;
   padding: 100px 0;
+  /* Ensure sections scroll into view below fixed header */
+  scroll-margin-top: calc(var(--header-height) + 16px);
 }
 
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 430px;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
   align-items: center;
   gap: 40px;
-  padding: 116px max(16px, calc((100% - var(--max)) / 2)) 70px;
+  /* Padding accounts for both fixed header height and content spacing */
+  padding: calc(var(--header-height) + 70px) max(16px, calc((100% - var(--max)) / 2)) 70px;
   overflow: hidden;
   isolation: isolate;
+  scroll-margin-top: var(--header-height);
 }
 
 .hero-bg {
@@ -404,10 +415,13 @@ h3 {
 .hero-proof {
   max-width: 760px;
   margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .hero-proof span {
-  flex: 1 1 170px;
+  flex: 1 1 min(220px, 100%);
   min-height: 82px;
   display: grid;
   align-content: center;
@@ -622,7 +636,7 @@ h3 {
   position: relative;
   z-index: 5;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1px;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -661,7 +675,9 @@ h3 {
 }
 
 .image-stack img:first-child {
-  height: 620px;
+  min-height: 320px;
+  max-height: 520px;
+  height: auto;
 }
 
 .section-head {
@@ -672,7 +688,7 @@ h3 {
 .cert-grid,
 .uses-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
 }
 
@@ -715,7 +731,7 @@ h3 {
 
 .product-range-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-bottom: 28px;
 }
@@ -799,8 +815,10 @@ h3 {
 }
 
 .product-visual img {
-  height: 100%;
-  min-height: 500px;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  max-height: 560px;
 }
 
 .product-copy {
@@ -835,7 +853,7 @@ h3 {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 14px;
 }
 
@@ -897,7 +915,7 @@ h3 {
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 
@@ -929,7 +947,8 @@ h3 {
 .buffer-list {
   margin: 0;
   padding: 22px 22px 22px 50px;
-  columns: 2;
+  columns: 2 220px;
+  column-gap: 28px;
   border-left: 4px solid var(--green);
 }
 
@@ -945,7 +964,7 @@ h3 {
 }
 
 .uses-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)it, minmax(220px, 1fr));
 }
 
 .use-card {
@@ -1000,7 +1019,7 @@ h3 {
 }
 
 .cert-grid {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .cert-card {
@@ -1025,7 +1044,7 @@ h3 {
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
 }
 
@@ -1114,7 +1133,7 @@ h3 {
 
 .contact-section {
   display: grid;
-  grid-template-columns: 0.85fr 1fr;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
   gap: 38px;
   align-items: start;
 }
@@ -1387,12 +1406,15 @@ h3 {
     padding-bottom: 88px;
   }
 
+  /* Adjust scroll offsets for anchor links with fixed header */
   section,
   #home,
+  #about,
   #products,
   #process,
+  #certificates,
   #contact {
-    scroll-margin-top: 96px;
+    scroll-margin-top: calc(var(--header-height) + 16px);
   }
 
   .hero,
@@ -1518,7 +1540,7 @@ h3 {
     bottom: max(12px, env(safe-area-inset-bottom));
     z-index: 70;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
     gap: 8px;
     padding: 8px;
     border: 1px solid var(--line);
@@ -1557,12 +1579,15 @@ h3 {
       var(--bg);
   }
 
+  /* Adjust scroll offsets for mobile anchor links */
   section,
   #home,
+  #about,
   #products,
   #process,
+  #certificates,
   #contact {
-    scroll-margin-top: 92px;
+    scroll-margin-top: calc(var(--header-height) + 16px);
   }
 
   .site-header {
@@ -1650,7 +1675,8 @@ h3 {
     min-height: auto;
     gap: 14px;
     margin-top: 10px;
-    padding: 96px 14px 16px;
+    /* Use dynamic header height plus content padding for mobile */
+    padding: calc(var(--header-height) + 40px) 14px 16px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     background: #121212;
@@ -1697,7 +1723,7 @@ h3 {
 
   .hero-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 9px;
     margin-top: 20px;
   }
@@ -1916,7 +1942,7 @@ h3 {
     left: 10px;
     right: 10px;
     bottom: max(10px, env(safe-area-inset-bottom));
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
     gap: 5px;
     padding: 7px;
     border-color: color-mix(in srgb, var(--blue) 28%, var(--line));

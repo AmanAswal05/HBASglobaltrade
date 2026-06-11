@@ -6,6 +6,45 @@
   const header = document.querySelector("[data-header]");
   const savedTheme = localStorage.getItem("hbas-theme");
 
+  /* ========================================
+     DYNAMIC HEADER HEIGHT CALCULATION
+     Prevents fixed header from overlapping content on all screen sizes.
+     This function measures the header's actual height including its top offset
+     and applies it as a CSS variable that adjusts hero section padding dynamically.
+     ======================================== */
+  function updateHeaderHeight() {
+    if (header) {
+      const headerHeight = header.offsetHeight;
+      const headerTop = parseInt(window.getComputedStyle(header).top, 10) || 0;
+      const totalHeaderSpace = headerHeight + headerTop;
+      root.style.setProperty('--header-height', totalHeaderSpace + 'px');
+    }
+  }
+
+  // Call on DOMContentLoaded to set initial header height
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateHeaderHeight);
+  } else {
+    updateHeaderHeight();
+  }
+
+  // Recalculate on window resize for responsive layout changes
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateHeaderHeight, 150);
+  });
+
+  // Recalculate when mobile menu opens/closes as it affects header size
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      setTimeout(updateHeaderHeight, 50);
+    });
+  }
+
+  /* ========================================
+     THEME TOGGLE
+     ======================================== */
   if (savedTheme === "dark") {
     root.dataset.theme = "dark";
   }
@@ -21,6 +60,9 @@
     }
   });
 
+  /* ========================================
+     NAVIGATION MENU
+     ======================================== */
   navToggle?.addEventListener("click", () => {
     const isOpen = navPanel.classList.toggle("open");
     navToggle.setAttribute("aria-expanded", String(isOpen));
@@ -39,7 +81,10 @@
     header?.classList.toggle("scrolled", window.scrollY > 24);
   });
 
-  const revealItems = document.querySelectorAll(".reveal");
+  /* ========================================
+     INTERSECTION OBSERVER FOR REVEAL ANIMATIONS
+     ======================================== */
+
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
