@@ -85,6 +85,7 @@
      INTERSECTION OBSERVER FOR REVEAL ANIMATIONS
      ======================================== */
 
+  const revealItems = document.querySelectorAll(".reveal");
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
