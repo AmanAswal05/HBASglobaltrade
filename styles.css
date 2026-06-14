@@ -17,6 +17,26 @@
   --max: 1180px;
   /* Dynamic header height - calculated by JavaScript to prevent content overlap */
   --header-height: 0px;
+  /* Responsive Spacing System */
+  --section-padding-desktop: 35px;
+  --section-padding-tablet: 25px;
+  --section-padding-mobile: 25px;
+  --content-gap: 32px;
+  --card-gap: 24px;
+}
+
+@media (max-width: 1020px) {
+  :root {
+    --content-gap: 28px;
+    --card-gap: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --content-gap: 24px;
+    --card-gap: 16px;
+  }
 }
 
 [data-theme="dark"] {
@@ -296,15 +316,18 @@ textarea {
 .section {
   width: min(calc(100% - 32px), var(--max));
   margin: 0 auto;
-  padding: 100px 0;
   /* Ensure sections scroll into view below fixed header */
   scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+.section:not(.hero) {
+  padding-top: var(--section-padding-desktop);
+  padding-bottom: var(--section-padding-desktop);
 }
 
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
   align-items: center;
@@ -684,7 +707,7 @@ h3 {
 }
 
 .section-head {
-  margin-bottom: 34px;
+  margin-bottom: var(--content-gap);
 }
 
 .feature-grid,
@@ -693,7 +716,7 @@ h3 {
 .applications-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
+  gap: var(--card-gap);
 }
 
 .feature-card {
@@ -724,10 +747,6 @@ h3 {
   color: var(--muted);
 }
 
-.product-section {
-  padding-top: 40px;
-}
-
 .product-section .section-head p {
   max-width: 760px;
   color: var(--muted);
@@ -737,8 +756,8 @@ h3 {
 .product-range-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: var(--card-gap);
+  margin-bottom: var(--content-gap);
 }
 
 .range-card {
@@ -817,6 +836,7 @@ h3 {
   grid-template-columns: 0.95fr 1fr;
   gap: 34px;
   padding: 20px;
+  margin-top: calc(var(--content-gap) * 2);
 }
 
 .product-visual img {
@@ -914,10 +934,6 @@ h3 {
   text-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
 }
 
-.process-wrap {
-  padding-bottom: 50px;
-}
-
 .timeline {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -945,9 +961,7 @@ h3 {
   line-height: 1.25;
 }
 
-.buffer-section {
-  padding-top: 50px;
-}
+/* Removed .buffer-section padding override */
 
 .buffer-list {
   margin: 0;
@@ -1028,6 +1042,7 @@ h3 {
   padding-inline: max(16px, calc((100% - var(--max)) / 2));
   overflow: hidden;
   color: #fffdf5;
+  margin-top: 50px;
 }
 
 .export-bg {
@@ -1045,6 +1060,10 @@ h3 {
 
 .export-content p {
   color: rgba(255, 253, 245, 0.86);
+}
+
+.cert-section {
+  padding-top: 15px;
 }
 
 .cert-grid {
@@ -1067,14 +1086,10 @@ h3 {
 }
 
 /* Visual Certificates Gallery */
-.certificates-section {
-  padding-top: 50px;
-}
-
 .certificates-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
+  gap: var(--card-gap);
 }
 
 .certificate-item {
@@ -1236,7 +1251,7 @@ h3 {
 
 .site-footer {
   width: min(calc(100% - 32px), var(--max));
-  margin: 0 auto 26px;
+  margin: 15px auto 26px;
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
   gap: 24px;
@@ -1493,6 +1508,19 @@ h3 {
     width: min(calc(100% - 32px), 720px);
   }
 
+  .section:not(.hero) {
+    padding-top: var(--section-padding-tablet);
+    padding-bottom: var(--section-padding-tablet);
+  }
+
+  .export-section {
+    margin-top: 40px;
+  }
+
+  .cert-section {
+    padding-top: 20px;
+  }
+
   .mobile-snapshot {
     display: grid;
     gap: 14px;
@@ -1552,6 +1580,7 @@ h3 {
 
   .site-footer {
     grid-template-columns: 1fr;
+    margin-top: 20px;
   }
 
   .site-footer nav {
@@ -1732,7 +1761,19 @@ h3 {
 
   .section {
     width: calc(100% - 24px);
-    padding: 42px 0;
+  }
+
+  .section:not(.hero) {
+    padding-top: var(--section-padding-mobile);
+    padding-bottom: var(--section-padding-mobile);
+  }
+
+  .export-section {
+    margin-top: 35px;
+  }
+
+  .cert-section {
+    padding-top: 20px;
   }
 
   .hero-content p,
@@ -1848,8 +1889,7 @@ h3 {
   }
 
   .product-range-grid {
-    gap: 10px;
-    margin-bottom: 16px;
+    margin-bottom: var(--content-gap);
   }
 
   .range-card,
@@ -1967,6 +2007,7 @@ h3 {
 
   .site-footer {
     width: calc(100% - 24px);
+    margin-top: 20px;
     margin-bottom: 18px;
   }
 
