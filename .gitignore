@@ -1,1 +1,3 @@
+# Ignore the large video file that exceeds GitHub's 100MB limit
+assets/Video advertisement.mp4
 .DS_Store
