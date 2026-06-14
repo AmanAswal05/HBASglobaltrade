@@ -641,13 +641,30 @@ h3 {
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange) 16%, transparent);
 }
 
-.metric-row span,
-.mini-proof span {
+.metric-row span {
   display: block;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: color-mix(in srgb, var(--surface-strong) 76%, transparent);
+}
+
+.mini-proof span {
+  display: block;
+  padding: 12px 16px;
+  border: 1px solid rgba(242, 154, 46, 0.16);
+  border-left: 4px solid #F29A2E;
+  border-radius: 8px;
+  background: #FFF3E0;
+  color: #1A1A1A;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(30, 30, 30, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mini-proof span:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(242, 154, 46, 0.12);
 }
 
 .metric-row b {
