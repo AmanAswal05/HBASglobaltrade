@@ -14,9 +14,7 @@
      ======================================== */
   function updateHeaderHeight() {
     if (header) {
-      const headerHeight = header.offsetHeight;
-      const headerTop = parseInt(window.getComputedStyle(header).top, 10) || 0;
-      const totalHeaderSpace = headerHeight + headerTop;
+      const totalHeaderSpace = Math.ceil(header.getBoundingClientRect().bottom);
       root.style.setProperty('--header-height', totalHeaderSpace + 'px');
     }
   }
@@ -26,6 +24,12 @@
     document.addEventListener('DOMContentLoaded', updateHeaderHeight);
   } else {
     updateHeaderHeight();
+  }
+
+  window.addEventListener('load', updateHeaderHeight);
+
+  if (header && 'ResizeObserver' in window) {
+    new ResizeObserver(updateHeaderHeight).observe(header);
   }
 
   // Recalculate on window resize for responsive layout changes

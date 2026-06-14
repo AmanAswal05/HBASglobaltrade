@@ -1579,6 +1579,10 @@ h3 {
       var(--bg);
   }
 
+  main {
+    padding-top: var(--header-height);
+  }
+
   /* Adjust scroll offsets for mobile anchor links */
   section,
   #home,
@@ -1675,8 +1679,7 @@ h3 {
     min-height: auto;
     gap: 14px;
     margin-top: 10px;
-    /* Use dynamic header height plus content padding for mobile */
-    padding: calc(var(--header-height) + 40px) 14px 16px;
+    padding: 40px 14px 16px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 8px;
     background: #121212;
