@@ -2102,6 +2102,7 @@ h3 {
   .nav-panel {
     position: fixed;
     top: 70px;
+    bottom: 10px;
     left: 10px;
     right: 10px;
     display: none;
@@ -2116,8 +2117,6 @@ h3 {
       var(--shadow),
       0 12px 42px rgba(31, 143, 175, 0.16);
     z-index: 95;
-    max-height: calc(100vh - 90px);
-    max-height: calc(100dvh - 90px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
