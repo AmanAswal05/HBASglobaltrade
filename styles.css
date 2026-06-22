@@ -40,7 +40,7 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   /* No-JS Fallback for Mobile Navigation */
   .no-js .nav-panel {
     display: flex !important;
@@ -2019,7 +2019,7 @@ h3 {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   /* No-JS Fallback for Mobile Navigation */
   .no-js .nav-panel {
     display: flex !important;
@@ -2561,7 +2561,7 @@ h3 {
   outline: none;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   /* No-JS Fallback for Mobile Navigation */
   .no-js .nav-panel {
     display: flex !important;
