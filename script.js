@@ -122,10 +122,10 @@
 
   function closeMobileMenu() {
     if (navPanel) {
-      navPanel.classList.remove("open");
+      navPanel.classList.remove("is-open", "active", "open");
+      navToggle?.classList.remove("is-open", "active", "open");
+      document.body.classList.remove("nav-open", "menu-open");
       navToggle?.setAttribute("aria-expanded", "false");
-      navToggle?.classList.remove("is-open");
-      document.body.classList.remove("menu-open");
       
       // Close dropdowns when mobile menu closes
       document.querySelectorAll(".dropdown.open").forEach((dropdown) => {
@@ -135,15 +135,26 @@
     }
   }
 
+  function openMobileMenu() {
+    if (navPanel) {
+      navPanel.classList.add("is-open", "open");
+      navToggle?.classList.add("is-open", "open");
+      document.body.classList.add("nav-open", "menu-open");
+      navToggle?.setAttribute("aria-expanded", "true");
+    }
+  }
+
   navToggle?.addEventListener("click", (e) => {
     e.stopPropagation();
-    const isOpen = navPanel.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-    navToggle.classList.toggle("is-open", isOpen);
-    document.body.classList.toggle("menu-open", isOpen);
-    
-    if (!isOpen) {
+    const isOpen =
+      navPanel.classList.contains("is-open") ||
+      navPanel.classList.contains("active") ||
+      navPanel.classList.contains("open");
+
+    if (isOpen) {
       closeMobileMenu();
+    } else {
+      openMobileMenu();
     }
   });
 
@@ -159,14 +170,22 @@
 
   // Close menu when clicking outside
   document.addEventListener("click", (e) => {
-    if (navPanel?.classList.contains("open") && !navPanel.contains(e.target) && !navToggle.contains(e.target)) {
+    const isOpen =
+      navPanel?.classList.contains("is-open") ||
+      navPanel?.classList.contains("open");
+      
+    if (isOpen && navPanel && !navPanel.contains(e.target) && navToggle && !navToggle.contains(e.target)) {
       closeMobileMenu();
     }
   });
 
   // Close menu on Escape key
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && navPanel?.classList.contains("open")) {
+    const isOpen =
+      navPanel?.classList.contains("is-open") ||
+      navPanel?.classList.contains("open");
+      
+    if (e.key === "Escape" && isOpen) {
       closeMobileMenu();
       navToggle?.focus();
     }
