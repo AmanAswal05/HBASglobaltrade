@@ -288,14 +288,14 @@ textarea {
   }
 }
 
-.nav-panel a:not(.icon-link),
+.nav-panel > a:not(.icon-link),
 .theme-toggle,
 .nav-toggle {
   min-height: 42px;
   border-radius: 8px;
 }
 
-.nav-panel a:not(.icon-link) {
+.nav-panel > a:not(.icon-link) {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -307,7 +307,7 @@ textarea {
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-panel a:not(.icon-link)::after {
+.nav-panel > a:not(.icon-link)::after {
   content: "";
   position: absolute;
   bottom: 6px;
@@ -320,11 +320,15 @@ textarea {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-panel a:not(.icon-link):hover {
-  color: var(--text);
+.nav-panel > a:not(.icon-link):hover,
+.nav-panel > a:not(.icon-link):focus-visible,
+.nav-panel > a:not(.icon-link).active {
+  color: var(--orange);
 }
 
-.nav-panel a:not(.icon-link):hover::after {
+.nav-panel > a:not(.icon-link):hover::after,
+.nav-panel > a:not(.icon-link):focus-visible::after,
+.nav-panel > a:not(.icon-link).active::after {
   transform: scaleX(1);
 }
 
@@ -2117,10 +2121,10 @@ h3 {
     width: 100%;
   }
 
-  .nav-panel a:not(.icon-link),
-  .nav-panel .dropdown-toggle,
-  .icon-link,
-  .theme-toggle {
+  .nav-panel > a:not(.icon-link),
+  .nav-panel > .dropdown > .dropdown-toggle,
+  .nav-panel > .icon-link,
+  .nav-panel > .theme-toggle {
     width: 100%;
     justify-content: center;
     min-height: 52px;
@@ -2568,17 +2572,40 @@ h3 {
   }
 
   .dropdown-menu {
-    position: static;
+    position: relative;
     transform: none;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0;
     box-shadow: none;
     border: none;
     background: transparent;
-    padding-left: 16px;
-    margin-top: 4px;
+    padding-left: 0;
+    margin-top: 12px;
     display: none;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    max-height: 1000px;
+    overflow: visible;
+    z-index: 999;
   }
+  
   .dropdown.open .dropdown-menu {
     display: flex;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: var(--hero-card-bg);
+    color: var(--hero-card-heading);
+    transition: background 0.3s ease, color 0.3s ease;
   }
 }
 

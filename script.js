@@ -68,6 +68,21 @@
       const dropdown = toggle.closest(".dropdown");
       const isOpen = dropdown.classList.toggle("open");
       toggle.setAttribute("aria-expanded", String(isOpen));
+      
+      // Mobile Products Dropdown Debugging
+      console.log(`[Products Dropdown] State: ${isOpen ? "OPEN" : "CLOSED"}`);
+      const menu = dropdown.querySelector(".dropdown-menu");
+      if (menu) {
+        const items = menu.querySelectorAll("a");
+        console.log(`[Products Dropdown] Found ${items.length} submenu items in DOM.`);
+        if (items.length === 0) {
+          console.warn("[Products Dropdown] WARNING: Submenu items are missing from DOM!");
+        } else {
+          console.log(`[Products Dropdown] First item: ${items[0].textContent.trim()} (${items[0].href})`);
+        }
+      } else {
+        console.error("[Products Dropdown] ERROR: .dropdown-menu container not found!");
+      }
     });
 
     toggle.addEventListener("keydown", (e) => {
