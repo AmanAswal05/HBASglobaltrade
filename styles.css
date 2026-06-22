@@ -2134,7 +2134,7 @@ h3 {
     min-height: 52px;
     border: 1px solid var(--line);
     border-radius: 8px;
-    background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
+    background: var(--surface-strong);
     font-size: 0.98rem;
   }
 
@@ -2579,7 +2579,7 @@ h3 {
     position: relative;
     transform: none;
     left: 0;
-    margin: 12px 0 0 0;
+    margin: 0;
     box-shadow: none;
     border: none;
     background: transparent;
