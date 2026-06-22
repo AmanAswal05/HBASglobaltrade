@@ -120,17 +120,55 @@
     });
   });
 
-  navToggle?.addEventListener("click", () => {
-    const isOpen = navPanel.classList.toggle("open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-    document.body.classList.toggle("menu-open", isOpen);
-  });
-
-  navPanel?.addEventListener("click", (event) => {
-    if (event.target.closest("a")) {
+  function closeMobileMenu() {
+    if (navPanel) {
       navPanel.classList.remove("open");
       navToggle?.setAttribute("aria-expanded", "false");
+      navToggle?.classList.remove("is-open");
       document.body.classList.remove("menu-open");
+      
+      // Close dropdowns when mobile menu closes
+      document.querySelectorAll(".dropdown.open").forEach((dropdown) => {
+        dropdown.classList.remove("open");
+        dropdown.querySelector("[data-dropdown-toggle]")?.setAttribute("aria-expanded", "false");
+      });
+    }
+  }
+
+  navToggle?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = navPanel.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.classList.toggle("is-open", isOpen);
+    document.body.classList.toggle("menu-open", isOpen);
+    
+    if (!isOpen) {
+      closeMobileMenu();
+    }
+  });
+
+  navPanel?.addEventListener("click", (e) => {
+    // Prevent closing if tapping the Products dropdown toggle itself
+    if (e.target.closest("[data-dropdown-toggle]")) return;
+    
+    // Close menu when tapping any regular link
+    if (e.target.closest("a")) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (navPanel?.classList.contains("open") && !navPanel.contains(e.target) && !navToggle.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close menu on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && navPanel?.classList.contains("open")) {
+      closeMobileMenu();
+      navToggle?.focus();
     }
   });
 
