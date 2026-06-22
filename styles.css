@@ -148,8 +148,10 @@ body {
   overflow-x: hidden;
 }
 
+html.menu-open,
 body.menu-open {
-  overflow: hidden;
+  overflow: hidden !important;
+  overscroll-behavior: none;
 }
 
 img {
@@ -2116,6 +2118,7 @@ h3 {
     z-index: 95;
     max-height: calc(100vh - 90px);
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .nav-panel.open {

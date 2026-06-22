@@ -125,6 +125,7 @@
       navPanel.classList.remove("is-open", "active", "open");
       navToggle?.classList.remove("is-open", "active", "open");
       document.body.classList.remove("nav-open", "menu-open");
+      document.documentElement.classList.remove("menu-open");
       navToggle?.setAttribute("aria-expanded", "false");
       
       // Close dropdowns when mobile menu closes
@@ -140,6 +141,7 @@
       navPanel.classList.add("is-open", "open");
       navToggle?.classList.add("is-open", "open");
       document.body.classList.add("nav-open", "menu-open");
+      document.documentElement.classList.add("menu-open");
       navToggle?.setAttribute("aria-expanded", "true");
     }
   }
