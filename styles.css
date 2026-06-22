@@ -2116,11 +2116,13 @@ h3 {
       var(--shadow),
       0 12px 42px rgba(31, 143, 175, 0.16);
     z-index: 95;
-    max-height: calc(100vh - 90px);
-    max-height: calc(100dvh - 90px);
-    overflow-y: auto;
+    max-height: calc(100vh - 90px) !important;
+    max-height: calc(100dvh - 90px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+    overscroll-behavior-y: contain;
+    touch-action: pan-y !important;
   }
 
   .nav-panel.open {
@@ -2149,6 +2151,7 @@ h3 {
     background: var(--surface-strong);
     font-size: 0.98rem;
     flex-shrink: 0;
+    touch-action: pan-y !important;
   }
 
   .nav-panel .icon-link,
@@ -2628,6 +2631,7 @@ h3 {
     color: var(--hero-card-heading);
     border: 1px solid var(--hero-card-border);
     transition: background 0.3s ease, color 0.3s ease;
+    touch-action: pan-y !important;
   }
 
   /* FORCE SINGLE COLUMN LAYOUT FOR ALL NAV CONTAINERS */
