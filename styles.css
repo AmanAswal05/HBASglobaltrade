@@ -24,6 +24,13 @@
   --section-padding-mobile: 25px;
   --content-gap: 32px;
   --card-gap: 24px;
+  /* Hero Card Variables */
+  --hero-card-bg: #F4F2EE;
+  --hero-card-heading: #111111;
+  --hero-card-p: #333333;
+  --hero-card-label: #E88A3D;
+  --hero-card-border: rgba(31, 143, 175, 0.2);
+  --hero-card-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 1020px) {
@@ -69,6 +76,13 @@
   --cream: #1e1e1e;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.46);
   --soft-shadow: 0 16px 46px rgba(76, 175, 80, 0.12);
+  /* Hero Card Variables */
+  --hero-card-bg: #121212;
+  --hero-card-heading: #FFFFFF;
+  --hero-card-p: rgba(255, 255, 255, 0.85);
+  --hero-card-label: #E88A3D;
+  --hero-card-border: rgba(255, 255, 255, 0.08);
+  --hero-card-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 [data-theme="dark"] body {
@@ -454,6 +468,21 @@ textarea {
   align-self: center;
 }
 
+.hero-content h1 {
+  color: var(--hero-card-heading);
+  transition: color 0.3s ease;
+}
+
+.hero-content p {
+  color: var(--hero-card-p);
+  transition: color 0.3s ease;
+}
+
+.hero-content .eyebrow {
+  color: var(--hero-card-label);
+  transition: color 0.3s ease;
+}
+
 .hero-bg + .hero-content {
   color: #fffdf5;
 }
@@ -513,12 +542,23 @@ h3 {
 .export-content p,
 .contact-copy p {
   max-width: 690px;
-  color: var(--muted);
   font-size: 1.06rem;
 }
 
+.section-copy p,
+.product-copy p,
+.export-content p,
+.contact-copy p {
+  color: var(--muted);
+}
+
+.hero-bg + .hero-content h1,
+.hero-bg + .hero-content .eyebrow {
+  color: #ffffff;
+}
+
 .hero-bg + .hero-content p {
-  color: rgba(255, 253, 245, 0.86);
+  color: rgba(255, 255, 255, 0.86);
 }
 
 .hero-actions,
@@ -2073,13 +2113,19 @@ h3 {
     display: flex;
   }
 
+  .nav-panel .dropdown {
+    width: 100%;
+  }
+
   .nav-panel a:not(.icon-link),
+  .nav-panel .dropdown-toggle,
   .icon-link,
   .theme-toggle {
     width: 100%;
     justify-content: center;
     min-height: 52px;
     border: 1px solid var(--line);
+    border-radius: 8px;
     background: color-mix(in srgb, var(--surface-strong) 82%, transparent);
     font-size: 0.98rem;
   }
@@ -2094,14 +2140,20 @@ h3 {
     gap: 14px;
     margin-top: 0px;
     padding: 24px 14px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--hero-card-border);
     border-radius: 8px;
-    background: #121212;
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    background: var(--hero-card-bg);
+    box-shadow: var(--hero-card-shadow);
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hero .hero-content {
+    position: relative;
+    z-index: 2;
   }
 
   .hero::after {
-    height: 12%;
+    display: none;
   }
 
   h1 {
