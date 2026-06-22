@@ -2624,21 +2624,25 @@ h3 {
   }
 
   /* FORCE SINGLE COLUMN LAYOUT FOR ALL NAV CONTAINERS */
+  .nav-panel,
   .nav-links,
   .mobile-nav,
   .nav-menu {
-    display: flex !important;
     flex-direction: column !important;
     grid-template-columns: none !important;
     flex-wrap: nowrap !important;
     width: 100% !important;
   }
 
-  .nav-panel {
-    flex-direction: column !important;
-    grid-template-columns: none !important;
-    flex-wrap: nowrap !important;
-    width: 100% !important;
+  .nav-links,
+  .mobile-nav,
+  .nav-menu {
+    display: flex !important;
+  }
+
+  .nav-panel.open,
+  .nav-panel.is-open {
+    display: flex !important;
   }
 
   .nav-panel > *,
