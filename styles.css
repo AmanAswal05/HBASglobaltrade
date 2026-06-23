@@ -2121,8 +2121,6 @@ h3 {
     overflow-y: auto !important;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    touch-action: pan-y !important;
   }
 
   .nav-panel.open {
@@ -2151,7 +2149,6 @@ h3 {
     background: var(--surface-strong);
     font-size: 0.98rem;
     flex-shrink: 0;
-    touch-action: pan-y !important;
   }
 
   .nav-panel .icon-link,
@@ -2631,7 +2628,6 @@ h3 {
     color: var(--hero-card-heading);
     border: 1px solid var(--hero-card-border);
     transition: background 0.3s ease, color 0.3s ease;
-    touch-action: pan-y !important;
   }
 
   /* FORCE SINGLE COLUMN LAYOUT FOR ALL NAV CONTAINERS */
@@ -3345,4 +3341,37 @@ select:focus-visible,
 .mobile-contact-dock a:focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 3px;
+}
+
+/* ========================================
+   COMPACT MOBILE NAVIGATION (SMALL PHONES)
+   ======================================== */
+@media (max-width: 480px) {
+  .nav-panel {
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .nav-panel > a:not(.icon-link),
+  .nav-panel > .dropdown > .dropdown-toggle,
+  .nav-panel > .icon-link,
+  .nav-panel > .theme-toggle {
+    min-height: 44px;
+    font-size: 0.92rem;
+  }
+
+  .nav-panel .icon-link,
+  .nav-panel .theme-toggle {
+    min-height: 40px;
+  }
+
+  .dropdown-menu {
+    gap: 4px;
+  }
+
+  .dropdown-menu a {
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 0.86rem;
+  }
 }
