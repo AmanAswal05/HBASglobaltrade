@@ -1483,12 +1483,38 @@ h3 {
   font-style: normal;
 }
 
-.site-footer nav {
+.site-footer .footer-contacts {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 16px;
   font-weight: 850;
+}
+
+.site-footer .footer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-footer .footer-contact-link {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.site-footer .footer-contact-link:hover {
+  color: var(--accent);
+}
+
+.site-footer .footer-wa-icon {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+
+.site-footer .footer-wa-icon:hover {
+  color: var(--accent);
 }
 
 .copyright {
@@ -1970,8 +1996,10 @@ h3 {
     margin-top: 20px;
   }
 
-  .site-footer nav {
+  .site-footer .footer-contacts {
+    flex-direction: column;
     justify-content: flex-start;
+    gap: 12px;
   }
 
   .whatsapp-float,
